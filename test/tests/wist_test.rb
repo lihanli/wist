@@ -50,4 +50,9 @@ class TestWist < CapybaraTestCase
     assert_equal false, has_class('#class_test', 'baz')
   end
 
+  def test_alert_accept
+    click '#alert_test'
+    alert_accept 'alert'
+  end
+
 end

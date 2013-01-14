@@ -17,13 +17,23 @@ module Wist
     assert_equal text, CGI.parse(URI.parse(find('.twitter-share-button')[:src].gsub('#', '?')).query)['text'][0]
   end
 
+  def driver
+    page.driver.browser
+  end
+
   def switch_to_window_and_execute
-    driver = page.driver.browser
     wait_until { driver.window_handles.size == 2 }
     within_window(driver.window_handles.last) do
       yield
       driver.close
     end
+  end
+
+  def alert_accept(expected_msg = false)
+    sleep 0.5
+    alert = driver.switch_to.alert
+    assert alert.text.include?(expected_msg) if expected_msg
+    alert.accept
   end
 
   def get_js(code)
