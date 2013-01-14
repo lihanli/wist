@@ -1,12 +1,12 @@
 module Wist
+
   def self.included(base)
     require 'selenium-webdriver'
     require 'cgi'
-    const_set :WAIT, Selenium::WebDriver::Wait.new(timeout: 20)
   end
 
-  def wait_until(&block)
-    WAIT.until &block
+  def wait_until(timeout = 20, &block)
+    Selenium::WebDriver::Wait.new(timeout: timeout).until &block
   end
 
   def click(selector)

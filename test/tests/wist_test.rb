@@ -6,10 +6,12 @@ class TestWist < CapybaraTestCase
     visit "file://#{Dir.pwd}/test/test0.html"
   end
 
+  # helpers
   def verify_test_page(num)
     assert current_path.match(/test#{num}.html$/)
   end
 
+  # tests
   def test_click
     click '#click_test'
     assert_equal 'clicked', find('#click_test').text
