@@ -64,4 +64,10 @@ class TestWist < CapybaraTestCase
     verify_test_page 1
   end
 
+  def test_refresh
+    find('#input_test').set 'foo'
+    refresh
+    assert_equal '', get_val('#input_test')
+  end
+
 end

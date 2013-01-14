@@ -1,5 +1,5 @@
-require 'wist'
 require 'capybara'
+require 'wist'
 require 'pry'
 begin; require 'turn/autorun'; rescue LoadError; end
 Turn.config.format = :dot

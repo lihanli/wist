@@ -59,6 +59,10 @@ module Wist
     wait_until { current_url != old_url }
   end
 
+  def refresh
+    visit current_path
+  end
+
   def wait_for_ajax
     wait_until { get_js '$.isReady && ($.active == 0)' }
   end
