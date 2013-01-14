@@ -3,7 +3,11 @@ require 'test_helper'
 class TestWist < CapybaraTestCase
   def setup
     super
-    visit "file://#{Dir.pwd}/test/test.html"
+    visit "file://#{Dir.pwd}/test/test0.html"
+  end
+
+  def verify_test_page(num)
+    assert current_path.match(/test#{num}.html$/)
   end
 
   def test_click
@@ -24,20 +28,19 @@ class TestWist < CapybaraTestCase
   end
 
   def test_switch_to_window_and_execute
-    assert_on_window_1 = -> { assert current_path.match(/test.html$/) }
 
-    assert_on_window_1.()
+    verify_test_page 0
     click '#switch_window_test'
 
     switch_to_window_and_execute do
-      assert current_path.match(/test1.html$/)
+      verify_test_page 1
     end
 
-    assert_on_window_1.()
+    verify_test_page 0
   end
 
   def test_get_js
-    assert get_js('document.URL').match(/test.html$/)
+    assert get_js('document.URL').match(/test0.html$/)
   end
 
   def test_get_val
@@ -53,6 +56,12 @@ class TestWist < CapybaraTestCase
   def test_alert_accept
     click '#alert_test'
     alert_accept 'alert'
+  end
+
+  def test_wait_for_new_url
+    verify_test_page 0
+    wait_for_new_url find('#wait_for_new_url_test')
+    verify_test_page 1
   end
 
 end

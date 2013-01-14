@@ -52,6 +52,13 @@ module Wist
     get_js "#{jquery_selector selector}.hasClass('#{class_name}')"
   end
 
+  def wait_for_new_url(element_to_click)
+    old_url = current_url
+    element_to_click.click
+    sleep 1
+    wait_until { current_url != old_url }
+  end
+
   def wait_for_ajax
     wait_until { get_js '$.isReady && ($.active == 0)' }
   end
