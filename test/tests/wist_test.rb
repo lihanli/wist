@@ -46,6 +46,8 @@ class TestWist < CapybaraTestCase
   end
 
   def test_has_class
+    %w(foo bar).each { |c| assert has_class('#class_test', c) }
+    assert_equal false, has_class('#class_test', 'baz')
   end
 
 end
