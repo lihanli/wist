@@ -19,7 +19,7 @@ module Wist
 
   def switch_to_window_and_execute
     driver = page.driver.browser
-    wait_until { page.driver.browser.window_handles.size == 2 }
+    wait_until { driver.window_handles.size == 2 }
     within_window(driver.window_handles.last) do
       yield
       driver.close

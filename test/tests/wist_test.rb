@@ -19,6 +19,7 @@ class TestWist < CapybaraTestCase
   end
 
   def test_verify_tweet_button
+    click '#enable_tweet_button'
     verify_tweet_button 'check this out'
   end
 
@@ -42,6 +43,9 @@ class TestWist < CapybaraTestCase
   def test_get_val
     find('#input_test').set 'foo'
     assert_equal 'foo', get_val('#input_test')
+  end
+
+  def test_has_class
   end
 
 end
