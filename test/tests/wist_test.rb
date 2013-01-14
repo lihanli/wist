@@ -39,4 +39,9 @@ class TestWist < CapybaraTestCase
     assert get_js('document.URL').match(/test.html$/)
   end
 
+  def test_get_val
+    find('#input_test').set 'foo'
+    assert_equal 'foo', get_val('#input_test')
+  end
+
 end
