@@ -18,4 +18,8 @@ class TestWist < CapybaraTestCase
     wait_until { button.text == 'clicked' }
   end
 
+  def test_tweet_button
+    verify_tweet_button 'check this out'
+  end
+
 end

@@ -1,6 +1,7 @@
 module Wist
   def self.included(base)
     require 'selenium-webdriver'
+    require 'cgi'
     const_set :WAIT, Selenium::WebDriver::Wait.new(timeout: 20)
   end
 
@@ -13,7 +14,7 @@ module Wist
   end
 
   def verify_tweet_button(text)
-    assert_equal text, Rack::Utils.parse_query(URI.parse(find('.twitter-share-button')[:src].gsub('#', '?')).query)['text']
+    assert_equal text, CGI.parse(URI.parse(find('.twitter-share-button')[:src].gsub('#', '?')).query)['text'][0]
   end
 
   def switch_to_window_and_execute
