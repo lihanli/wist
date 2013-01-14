@@ -63,6 +63,10 @@ module Wist
     visit current_path
   end
 
+  def element_displayed?(selector)
+    find(selector).visible?
+  end
+
   def wait_for_ajax
     wait_until { get_js '$.isReady && ($.active == 0)' }
   end

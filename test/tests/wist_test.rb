@@ -70,4 +70,9 @@ class TestWist < CapybaraTestCase
     assert_equal '', get_val('#input_test')
   end
 
+  def test_element_displayed?
+    assert_equal false, element_displayed?('#invisible')
+    assert element_displayed?('#input_test')
+  end
+
 end
