@@ -5,8 +5,8 @@ module Wist
     require 'cgi'
   end
 
-  def wait_until(timeout = 20, &block)
-    Selenium::WebDriver::Wait.new(timeout: timeout).until &block
+  def wait_until(&block)
+    Selenium::WebDriver::Wait.new(timeout: defined?(@wait) ? @wait : 20).until &block
   end
 
   def click(selector)

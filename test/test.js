@@ -3,7 +3,7 @@ $('#click_test').click(function() {
 });
 
 $('#wait_test').click(function() {
-	$this = $(this);
+	var $this = $(this);
 
 	setTimeout(function(){
 		$this.text('clicked');
