@@ -8,10 +8,6 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'capybara'
 
-  gem.add_development_dependency 'pry'
-  gem.add_development_dependency 'turn'
-  gem.add_development_dependency 'rake'
-
   gem.files         = `git ls-files`.split("\n")
   gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   gem.require_paths = ["lib"]
