@@ -17,3 +17,12 @@ $('#enable_tweet_button').click(function() {
 $('#alert_test').click(function() {
 	alert('alert');
 });
+
+$('#test_wait_til_element_visible').click(function() {
+  var $this = $(this);
+  $this.hide();
+
+  setTimeout(function() {
+    $this.show();
+  }, 1000);
+});

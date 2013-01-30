@@ -77,4 +77,12 @@ class TestWist < CapybaraTestCase
     assert element_displayed?('#input_test')
   end
 
+  def test_wait_til_element_visible
+    el = find('#test_wait_til_element_visible')
+    el.click
+    assert_equal false, el.visible?
+
+    assert wait_til_element_visible('#test_wait_til_element_visible').visible?
+  end
+
 end

@@ -71,4 +71,13 @@ module Wist
     wait_until { get_js '$.isReady && ($.active == 0)' }
   end
 
+  def wait_til_element_visible(selector)
+    el = nil
+    wait_until do
+      el = find(selector)
+      el.visible?
+    end
+    el
+  end
+
 end
