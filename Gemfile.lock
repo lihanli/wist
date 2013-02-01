@@ -1,3 +1,12 @@
+GIT
+  remote: git://github.com/jonleighton/poltergeist.git
+  revision: 98d4a4a8936e8d6b3417f2c057bafaba40874eee
+  specs:
+    poltergeist (1.0.2)
+      capybara (~> 2.0, >= 2.0.1)
+      faye-websocket (~> 0.4, >= 0.4.4)
+      http_parser.rb (~> 0.5.3)
+
 PATH
   remote: .
   specs:
@@ -19,7 +28,11 @@ GEM
     childprocess (0.3.6)
       ffi (~> 1.0, >= 1.0.6)
     coderay (1.0.8)
+    eventmachine (1.0.0)
+    faye-websocket (0.4.6)
+      eventmachine (>= 0.12.0)
     ffi (1.3.1)
+    http_parser.rb (0.5.3)
     libwebsocket (0.1.7.1)
       addressable
       websocket
@@ -47,6 +60,7 @@ GEM
       minitest (~> 4.3.0)
       term-ansicolor (~> 1.0.7)
     term-ansicolor (1.0.7)
+    test-unit (2.5.3)
     turn (0.9.6)
       ansi
     websocket (1.0.6)
@@ -58,8 +72,10 @@ PLATFORMS
 
 DEPENDENCIES
   capybara (= 2.0.2)
+  poltergeist!
   pry
   rake
   tconsole
+  test-unit
   turn
   wist!

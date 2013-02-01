@@ -30,7 +30,7 @@ class TestWist < CapybaraTestCase
   end
 
   def test_switch_to_window_and_execute
-
+    omit_if Capybara.javascript_driver == :poltergeist
     verify_test_page 0
     click '#switch_window_test'
 
