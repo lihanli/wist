@@ -32,11 +32,9 @@ module Wist
   end
 
   def alert_accept(expected_msg = false)
-    return if Capybara.javascript_driver == :poltergeist
-    sleep 0.5
-    alert = driver.switch_to.alert
-    assert alert.text.include?(expected_msg) if expected_msg
-    alert.accept
+    page.execute_script "window.alert = function(msg) { window.lastAlertMsg = msg; }"
+    yield
+    assert_equal(expected_msg, get_js('window.lastAlertMsg')) if expected_msg
   end
 
   def get_js(code)

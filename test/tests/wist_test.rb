@@ -30,7 +30,7 @@ class TestWist < CapybaraTestCase
   end
 
   def test_switch_to_window_and_execute
-    omit_if Capybara.javascript_driver == :poltergeist
+    return if Capybara.javascript_driver == :poltergeist
     verify_test_page 0
     click '#switch_window_test'
 
@@ -56,8 +56,9 @@ class TestWist < CapybaraTestCase
   end
 
   def test_alert_accept
-    click '#alert_test'
-    alert_accept 'alert'
+    alert_accept 'alert' do
+      click '#alert_test'
+    end
   end
 
   def test_wait_for_new_url

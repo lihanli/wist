@@ -60,7 +60,6 @@ GEM
       minitest (~> 4.3.0)
       term-ansicolor (~> 1.0.7)
     term-ansicolor (1.0.7)
-    test-unit (2.5.3)
     turn (0.9.6)
       ansi
     websocket (1.0.6)
@@ -76,6 +75,5 @@ DEPENDENCIES
   pry
   rake
   tconsole
-  test-unit
   turn
   wist!
