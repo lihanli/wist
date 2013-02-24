@@ -26,3 +26,7 @@ $('#test_wait_til_element_visible').click(function() {
     $this.show();
   }, 1000);
 });
+
+$('#test_set_value_and_trigger_evts').change(function () {
+  $(this).val('changed');
+});

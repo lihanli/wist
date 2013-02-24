@@ -16,6 +16,11 @@ module Wist
     find(selector).click
   end
 
+  def set_value_and_trigger_evts(selector, val)
+    find(selector).set(val)
+    page.execute_script("$('#{selector}').focusout().change()")
+  end
+
   def verify_tweet_button(text)
     share_button_src = nil
     wait_until { share_button_src = find('.twitter-share-button')[:src] }

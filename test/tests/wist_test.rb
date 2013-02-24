@@ -86,4 +86,9 @@ class TestWist < CapybaraTestCase
     assert wait_til_element_visible('#test_wait_til_element_visible').visible?
   end
 
+  def test_set_value_and_trigger_evts
+    set_value_and_trigger_evts('#test_set_value_and_trigger_evts', 'foo')
+    assert_equal('changed', get_val('#test_set_value_and_trigger_evts'))
+  end
+
 end
