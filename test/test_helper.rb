@@ -10,8 +10,8 @@ class CapybaraTestCase < Test::Unit::TestCase
   include Wist
 
   def setup
-    Capybara.javascript_driver = :poltergeist
-    Capybara.current_driver = Capybara.javascript_driver
+    Capybara.javascript_driver = ENV['BROWSER'].to_sym if ENV['BROWSER']
+    Capybara.current_driver    = Capybara.javascript_driver
   end
 
   def teardown

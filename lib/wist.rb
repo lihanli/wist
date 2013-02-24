@@ -3,6 +3,9 @@ module Wist
   def self.included(base)
     require 'selenium-webdriver'
     require 'cgi'
+    Capybara.register_driver :chrome do |app|
+      Capybara::Selenium::Driver.new(app, browser: :chrome)
+    end
   end
 
   def wait_until(&block)
@@ -61,7 +64,7 @@ module Wist
   end
 
   def refresh
-    visit current_path
+    visit current_url
   end
 
   def element_displayed?(selector)
