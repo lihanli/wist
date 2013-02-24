@@ -13,3 +13,10 @@ task 'test:all' do
     Rake::Task['test'].execute
   end
 end
+
+task :build do
+  system 'gem build wist.gemspec'
+  `rm -rf build`
+  `mkdir build`
+  `mv *.gem build`
+end
