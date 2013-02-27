@@ -18,7 +18,7 @@ module Wist
 
   def set_value_and_trigger_evts(selector, val)
     find(selector).set(val)
-    page.execute_script("$('#{selector}').focusout().change()")
+    page.execute_script("$('#{selector}').focusout().change().trigger('input')")
   end
 
   def verify_tweet_button(text)
