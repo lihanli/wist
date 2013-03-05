@@ -50,8 +50,9 @@ class WistTest < CapybaraTestCase
   end
 
   def test_has_class
-    %w(foo bar).each { |c| assert has_class('#class_test', c) }
-    assert_equal false, has_class('#class_test', 'baz')
+    el = find('#class_test')
+    %w(foo bar).each { |c| assert_equal(true, has_class?(el, c)) }
+    assert_equal(false, has_class?(el, 'baz'))
   end
 
   def test_alert_accept
@@ -91,8 +92,15 @@ class WistTest < CapybaraTestCase
   end
 
   def test_set_cookie
+    return if Capybara.javascript_driver == :chrome
     set_cookie('foo', 'bar')
     assert_equal('bar', page.evaluate_script("$.cookie('foo')"))
   end
 
+  def test_set_input_and_press_enter
+    alert_accept('enter pressed') do
+      set_input_and_press_enter('#test_set_input_and_press_enter', 'bar')
+    end
+    assert_equal('bar', get_val('#test_set_input_and_press_enter'))
+  end
 end

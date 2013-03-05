@@ -65,8 +65,13 @@ module Wist
     get_js "#{jquery_selector selector}.val()"
   end
 
-  def has_class(selector, class_name)
-    get_js "#{jquery_selector selector}.hasClass('#{class_name}')"
+  def set_input_and_press_enter(selector, val)
+    wait_til_element_visible(selector)
+    page.execute_script("#{jquery_selector(selector)}.val('#{val}').trigger({type: 'keydown', which: 13})")
+  end
+
+  def has_class?(el, class_name)
+    el[:class].split(' ').include?(class_name)
   end
 
   def wait_for_new_url(element_to_click)

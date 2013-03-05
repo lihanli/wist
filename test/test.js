@@ -30,3 +30,7 @@ $('#test_wait_til_element_visible').click(function() {
 $('#test_set_value_and_trigger_evts').change(function () {
   $(this).val('changed');
 });
+
+$('#test_set_input_and_press_enter').keydown(function (e) {
+  if (e.which === 13) alert('enter pressed');
+});
