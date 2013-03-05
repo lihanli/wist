@@ -1,12 +1,11 @@
 require 'test_helper'
 
-class TestWist < CapybaraTestCase
+class WistTest < CapybaraTestCase
   def setup
     super
     visit "file://#{Dir.pwd}/test/test0.html"
   end
 
-  # helpers
   def verify_test_page(num)
     assert current_path.match(/test#{num}.html$/)
   end
@@ -89,6 +88,11 @@ class TestWist < CapybaraTestCase
   def test_set_value_and_trigger_evts
     set_value_and_trigger_evts('#test_set_value_and_trigger_evts', 'foo')
     assert_equal('changed', get_val('#test_set_value_and_trigger_evts'))
+  end
+
+  def test_set_cookie
+    set_cookie('foo', 'bar')
+    assert_equal('bar', page.evaluate_script("$.cookie('foo')"))
   end
 
 end

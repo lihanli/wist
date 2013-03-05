@@ -16,6 +16,13 @@ module Wist
     find(selector).click
   end
 
+  def set_cookie(k, v)
+    page.execute_script <<-eos
+      (function (e,t,n){var r=new Date;r.setDate(r.getDate()+n);var i=escape(t)+(n==null?"":"; expires="+r.toUTCString());document.cookie=e+"="+i}
+      (#{k.to_json}, #{v.to_json}));
+    eos
+  end
+
   def set_value_and_trigger_evts(selector, val)
     find(selector).set(val)
     page.execute_script("$('#{selector}').focusout().change().trigger('input')")

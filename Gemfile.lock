@@ -10,7 +10,7 @@ GIT
 PATH
   remote: .
   specs:
-    wist (0.0.3)
+    wist (0.0.4)
       capybara
 
 GEM
