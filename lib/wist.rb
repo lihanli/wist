@@ -54,6 +54,7 @@ module Wist
   end
 
   def get_val(selector)
+    find(selector)
     get_js "#{jquery_selector selector}.val()"
   end
 
