@@ -16,6 +16,5 @@ class CapybaraTestCase < Test::Unit::TestCase
 
   def teardown
     Capybara.reset_sessions!
-    Capybara.use_default_driver
   end
 end

@@ -6,4 +6,4 @@ gem 'tconsole'
 gem 'pry'
 gem 'turn'
 gem 'rake'
-gem 'poltergeist', git: 'git://github.com/jonleighton/poltergeist.git'
+gem "poltergeist", "1.1.0"
