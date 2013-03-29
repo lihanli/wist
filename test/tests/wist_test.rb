@@ -20,7 +20,11 @@ class WistTest < CapybaraTestCase
     button = find('#wait_test')
     button.click
     assert button.text != 'clicked'
-    wait_until { button.text == 'clicked' }
+
+    wait_until do
+      raise unless button.text == 'clicked'
+      true
+    end
   end
 
   def test_verify_tweet_button

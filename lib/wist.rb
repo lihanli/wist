@@ -8,8 +8,14 @@ module Wist
     end
   end
 
-  def wait_until(&block)
-    Selenium::WebDriver::Wait.new(timeout: defined?(@wait) ? @wait : 20).until &block
+  def wait_until
+    Selenium::WebDriver::Wait.new(timeout: defined?(@wait) ? @wait : 20).until do
+      begin
+        yield
+      rescue
+        false
+      end
+    end
   end
 
   def click(selector)
