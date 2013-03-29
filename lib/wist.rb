@@ -95,12 +95,8 @@ module Wist
   end
 
   def wait_til_element_visible(selector)
-    el = nil
-    wait_until do
-      el = find(selector)
-      el.visible?
-    end
-    el
+    has_css?(selector, visible: true)
+    find(selector)
   end
 
 end
