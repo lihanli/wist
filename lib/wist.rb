@@ -61,8 +61,7 @@ module Wist
   end
 
   def get_val(selector)
-    find(selector)
-    get_js "#{jquery_selector selector}.val()"
+    find(selector).value
   end
 
   def set_input_and_press_enter(selector, val)
@@ -83,10 +82,6 @@ module Wist
 
   def refresh
     visit current_url
-  end
-
-  def element_displayed?(selector)
-    find(selector).visible?
   end
 
   def wait_for_ajax

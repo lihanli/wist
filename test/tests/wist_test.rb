@@ -73,11 +73,6 @@ class WistTest < CapybaraTestCase
     assert_equal '', get_val('#input_test')
   end
 
-  def test_element_displayed?
-    assert_equal false, element_displayed?('#invisible')
-    assert element_displayed?('#input_test')
-  end
-
   def test_wait_til_element_visible
     el = find('#test_wait_til_element_visible')
     el.click
