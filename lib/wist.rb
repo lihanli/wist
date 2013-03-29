@@ -99,4 +99,7 @@ module Wist
     find(selector)
   end
 
+  def scroll_to(selector)
+    page.execute_script("#{jquery_selector('html, body')}.scrollTop(#{jquery_selector(selector)}.offset().top)")
+  end
 end

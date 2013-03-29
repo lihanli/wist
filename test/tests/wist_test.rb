@@ -102,4 +102,10 @@ class WistTest < CapybaraTestCase
     end
     assert_equal('bar', get_val('#test_set_input_and_press_enter'))
   end
+
+  def test_scroll_to
+    old_offset = get_js('window.pageYOffset')
+    scroll_to('#test_scroll_to')
+    assert_equal(true, get_js('window.pageYOffset') != old_offset)
+  end
 end
