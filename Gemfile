@@ -1,7 +1,7 @@
 source 'http://rubygems.org/'
 gemspec
 
-gem 'capybara', '2.0.2'
+gem 'capybara', '2.0.3'
 gem 'tconsole'
 gem 'pry'
 gem 'turn'
