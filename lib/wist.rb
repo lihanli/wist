@@ -9,7 +9,7 @@ module Wist
   end
 
   def wait_until
-    Selenium::WebDriver::Wait.new(timeout: defined?(@wait) ? @wait : 20).until do
+    Selenium::WebDriver::Wait.new(timeout: Capybara.default_wait_time).until do
       begin
         yield
       rescue
