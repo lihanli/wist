@@ -57,6 +57,8 @@ class WistTest < CapybaraTestCase
     el = find('#class_test')
     %w(foo bar).each { |c| assert_equal(true, has_class?(el, c)) }
     assert_equal(false, has_class?(el, 'baz'))
+
+    assert_equal(false, has_class?(find('#click_test'), 'foo'))
   end
 
   def test_alert_accept

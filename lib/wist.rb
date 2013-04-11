@@ -8,6 +8,14 @@ module Wist
     end
   end
 
+  module Helpers
+    class << self
+      def blank?(obj)
+        obj.respond_to?(:empty?) ? obj.empty? : !obj
+      end
+    end
+  end
+
   def wait_until
     Selenium::WebDriver::Wait.new(timeout: Capybara.default_wait_time).until do
       begin
@@ -76,7 +84,9 @@ module Wist
   end
 
   def has_class?(el, class_name)
-    el[:class].split(' ').include?(class_name)
+    klass = el[:class]
+    return false if Helpers.blank?(klass)
+    klass.split(' ').include?(class_name)
   end
 
   def wait_for_new_url(element_to_click)
