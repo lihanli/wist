@@ -110,4 +110,13 @@ class WistTest < CapybaraTestCase
     scroll_to('#test_scroll_to')
     assert_equal(true, get_js('window.pageYOffset') != old_offset)
   end
+
+  def test_finder_with_wait
+    click('#finder_with_wait')
+    assert_equal('finder_with_wait', first_with_wait('.done')[:id])
+
+    refresh
+    click('#finder_with_wait')
+    assert_equal('finder_with_wait', all_with_wait('.done')[0][:id])
+  end
 end

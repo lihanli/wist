@@ -34,3 +34,11 @@ $('#test_set_value_and_trigger_evts').change(function () {
 $('#test_set_input_and_press_enter').keydown(function (e) {
   if (e.which === 13) alert('enter pressed');
 });
+
+$('#finder_with_wait').click(function () {
+  var $this = $(this);
+
+  setTimeout(function () {
+    $this.addClass('done');
+  }, 1000);
+});

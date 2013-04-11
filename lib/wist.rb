@@ -112,4 +112,11 @@ module Wist
   def scroll_to(selector)
     page.execute_script("#{jquery_selector('html, body')}.scrollTop(#{jquery_selector(selector)}.offset().top)")
   end
+
+  %w(first all).each do |finder|
+    define_method(:"#{finder}_with_wait") do |selector|
+      has_css?(selector)
+      page.send(finder.to_sym, selector)
+    end
+  end
 end
