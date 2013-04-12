@@ -1,11 +1,8 @@
 module Wist
-
-  def self.included(base)
-    require 'selenium-webdriver'
-    require 'cgi'
-    Capybara.register_driver :chrome do |app|
-      Capybara::Selenium::Driver.new(app, browser: :chrome)
-    end
+  require 'selenium-webdriver'
+  require 'cgi'
+  Capybara.register_driver :chrome do |app|
+    Capybara::Selenium::Driver.new(app, browser: :chrome)
   end
 
   module Helpers
