@@ -1,6 +1,5 @@
-require 'capybara'
-require 'capybara/poltergeist'
 require 'wist'
+require 'capybara/poltergeist'
 require 'pry'
 begin; require 'turn/autorun'; rescue LoadError; end
 Turn.config.format = :dot

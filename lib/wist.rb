@@ -1,6 +1,8 @@
 module Wist
   require 'selenium-webdriver'
   require 'cgi'
+  require 'capybara'
+
   Capybara.register_driver :chrome do |app|
     Capybara::Selenium::Driver.new(app, browser: :chrome)
   end
