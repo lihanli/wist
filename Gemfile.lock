@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    wist (0.0.10)
+    wist (0.0.11)
       capybara
 
 GEM
