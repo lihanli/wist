@@ -8,10 +8,10 @@ module Wist
   end
 
   module Helpers
-    class << self
-      def blank?(obj)
-        obj.respond_to?(:empty?) ? obj.empty? : !obj
-      end
+    module_function
+
+    def blank?(obj)
+      obj.respond_to?(:empty?) ? obj.empty? : !obj
     end
   end
 
@@ -117,5 +117,19 @@ module Wist
       has_css?(selector)
       page.send(finder.to_sym, selector)
     end
+  end
+
+  def visit_with_retries(url, retries: 5, wait_time: 10)
+    raise 'only works with poltergeist' unless Capybara.javascript_driver == :poltergeist
+    status = nil
+
+    retries.times do |i|
+      status = visit(url)['status']
+      break if status == 'success'
+      puts "visiting #{url} failed, attempting retry #{i + 1}/#{retries} in #{wait_time} second(s)"
+      sleep wait_time
+    end
+
+    raise "visit #{url} failed" unless status == 'success'
   end
 end

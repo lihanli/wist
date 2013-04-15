@@ -119,4 +119,15 @@ class WistTest < CapybaraTestCase
     click('#finder_with_wait')
     assert_equal('finder_with_wait', all_with_wait('.done')[0][:id])
   end
+
+  def test_visit_with_retries
+    return unless Capybara.javascript_driver == :poltergeist
+
+    assert_raise RuntimeError do
+      visit_with_retries('a.bc', retries: 2, wait_time: 1)
+    end
+
+    visit_with_retries("file://#{Dir.pwd}/test/test0.html")
+    verify_test_page(0)
+  end
 end
