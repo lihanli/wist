@@ -54,7 +54,7 @@ class WistTest < CapybaraTestCase
   end
 
   def test_has_class
-    el = find('#class_test')
+    el = find('#class_test', visible: false)
     %w(foo bar).each { |c| assert_equal(true, has_class?(el, c)) }
     assert_equal(false, has_class?(el, 'baz'))
 
@@ -140,6 +140,6 @@ class WistTest < CapybaraTestCase
   end
 
   def test_parent
-    assert_text('parent', parent(find('#test_parent')))
+    assert_text('parent', parent(find('#test_parent', visible: false)))
   end
 end
