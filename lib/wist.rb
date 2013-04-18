@@ -132,4 +132,16 @@ module Wist
 
     raise "visit #{url} failed" unless status == 'success'
   end
+
+  def assert_text(text, el)
+    assert_equal(text, el.text)
+  end
+
+  def assert_text_include(text, el)
+    assert_equal(true, el.text.include?(text))
+  end
+
+  def parent(el)
+    el.first(:xpath, './/..')
+  end
 end

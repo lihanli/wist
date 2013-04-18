@@ -130,4 +130,16 @@ class WistTest < CapybaraTestCase
     visit_with_retries("file://#{Dir.pwd}/test/test0.html")
     verify_test_page(0)
   end
+
+  def test_assert_text
+    assert_text('foo', find('#click_test'))
+  end
+
+  def test_assert_text_include
+    assert_text_include('fo', find('#click_test'))
+  end
+
+  def test_parent
+    assert_text('parent', parent(find('#test_parent')))
+  end
 end
