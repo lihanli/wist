@@ -113,9 +113,9 @@ module Wist
   end
 
   %w(first all).each do |finder|
-    define_method(:"#{finder}_with_wait") do |selector|
-      has_css?(selector)
-      page.send(finder.to_sym, selector)
+    define_method(:"#{finder}_with_wait") do |*args|
+      has_css?(*args)
+      page.send(finder.to_sym, *args)
     end
   end
 
