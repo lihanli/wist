@@ -142,4 +142,9 @@ class WistTest < CapybaraTestCase
   def test_parent
     assert_text('parent', parent(find('#test_parent', visible: false)))
   end
+
+  def test_click_by_text
+    click_by_text('button', 'click by text')
+    assert_text('clicked', find('#click_by_text'))
+  end
 end

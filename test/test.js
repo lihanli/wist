@@ -42,3 +42,7 @@ $('#finder_with_wait').click(function () {
     $this.addClass('done');
   }, 1000);
 });
+
+$('#click_by_text').click(function () {
+  $(this).text('clicked');
+});

@@ -144,4 +144,11 @@ module Wist
   def parent(el)
     el.first(:xpath, './/..')
   end
+
+  def click_by_text(selector, text, text_include: true, downcase: true)
+    all_with_wait(selector, visible: true).find do |el|
+      el_text = downcase ? el.text.downcase : el.text
+      text_include ? el_text.include?(text) : el_text == text
+    end.click
+  end
 end
