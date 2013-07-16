@@ -151,4 +151,10 @@ module Wist
       text_include ? el_text.include?(text) : el_text == text
     end.click
   end
+
+  %w(has has_no).each do |prefix|
+    define_method("assert_#{prefix}_css") do |*args|
+      assert_equal(true, send("#{prefix}_css?", *args))
+    end
+  end
 end

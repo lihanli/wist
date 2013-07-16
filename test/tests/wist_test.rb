@@ -147,4 +147,9 @@ class WistTest < CapybaraTestCase
     click_by_text('button', 'click by text')
     assert_text('clicked', find('#click_by_text'))
   end
+
+  def test_assert_css
+    assert_has_css('#click_test', visible: true)
+    assert_has_no_css('#dog123')
+  end
 end
