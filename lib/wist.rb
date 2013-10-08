@@ -79,7 +79,7 @@ module Wist
 
   def set_input_and_press_enter(selector, val)
     wait_til_element_visible(selector)
-    page.execute_script("#{jquery_selector(selector)}.val('#{val}').trigger({type: 'keydown', which: 13})")
+    page.execute_script("#{jquery_selector(selector)}.val('#{val}').trigger({type: 'keydown', which: 13}).trigger({ type: 'keypress', which: 13})")
   end
 
   def has_class?(el, class_name)
