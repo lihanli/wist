@@ -68,9 +68,14 @@ class WistTest < CapybaraTestCase
   end
 
   def test_wait_for_new_url
-    verify_test_page 0
-    wait_for_new_url find('#wait_for_new_url_test')
-    verify_test_page 1
+    verify_test_page(0)
+    wait_for_new_url(find('#wait_for_new_url_test'))
+    verify_test_page(1)
+  end
+
+  def test_wait_for_new_url_with_block
+    wait_for_new_url { click('#wait_for_new_url_test') }
+    verify_test_page(1)
   end
 
   def test_refresh

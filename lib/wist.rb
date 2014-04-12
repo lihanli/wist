@@ -88,9 +88,15 @@ module Wist
     klass.split(' ').include?(class_name)
   end
 
-  def wait_for_new_url(element_to_click)
+  def wait_for_new_url(element_to_click = nil)
     old_url = current_url
-    element_to_click.click
+
+    if element_to_click.nil?
+      yield
+    else
+      element_to_click.click
+    end
+
     sleep 1
     wait_until { current_url != old_url }
   end
