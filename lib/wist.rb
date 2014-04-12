@@ -157,4 +157,8 @@ module Wist
       assert_equal(true, send("#{prefix}_css?", *args))
     end
   end
+
+  def has_css_instant?(selector)
+    page.evaluate_script("$('#{selector}:visible').length > 0")
+  end
 end

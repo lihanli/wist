@@ -152,4 +152,9 @@ class WistTest < CapybaraTestCase
     assert_has_css('#click_test', visible: true)
     assert_has_no_css('#dog123')
   end
+
+  def test_has_css_instant?
+    assert_equal(true, has_css_instant?('body'))
+    assert_equal(false, has_css_instant?('#sdklfjk'))
+  end
 end
