@@ -25,6 +25,9 @@ class WistTest < CapybaraTestCase
       raise unless button.text == 'clicked'
       true
     end
+
+    # make sure default wait time is back to normal
+    assert_equal(2, Capybara.default_wait_time)
   end
 
   def test_verify_tweet_button
