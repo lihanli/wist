@@ -170,7 +170,7 @@ module Wist
   end
 
   def has_css_instant?(selector)
-    page.evaluate_script("$('#{selector}:visible').length > 0")
+    do_instantly { has_css?(selector) }
   end
 
   def do_instantly
