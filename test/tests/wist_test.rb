@@ -165,4 +165,20 @@ class WistTest < CapybaraTestCase
     assert_equal(true, has_css_instant?('body'))
     assert_equal(false, has_css_instant?('#sdklfjk'))
   end
+
+  def test_do_instantly
+    old_time = Capybara.default_wait_time
+    new_time = nil
+
+    begin
+      do_instantly do
+        new_time = Capybara.default_wait_time
+        raise
+      end
+    rescue
+    end
+
+    assert_equal(0, new_time)
+    assert_equal(old_time, Capybara.default_wait_time)
+  end
 end

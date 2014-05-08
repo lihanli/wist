@@ -172,4 +172,17 @@ module Wist
   def has_css_instant?(selector)
     page.evaluate_script("$('#{selector}:visible').length > 0")
   end
+
+  def do_instantly
+    old_time = Capybara.default_wait_time
+    Capybara.default_wait_time = 0
+
+    begin
+      yield
+    rescue => e
+      raise(e)
+    ensure
+      Capybara.default_wait_time = old_time
+    end
+  end
 end
