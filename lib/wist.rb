@@ -16,18 +16,15 @@ module Wist
   end
 
   def wait_until(timeout: Capybara.default_wait_time)
-    old_timeout = Capybara.default_wait_time
-    Capybara.default_wait_time = 0
-
-    Selenium::WebDriver::Wait.new(timeout: timeout).until do
-      begin
-        yield
-      rescue
-        false
+    do_instantly do
+      Selenium::WebDriver::Wait.new(timeout: timeout).until do
+        begin
+          yield
+        rescue
+          false
+        end
       end
     end
-
-    Capybara.default_wait_time = old_timeout
   end
 
   def click(selector)
