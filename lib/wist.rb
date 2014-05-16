@@ -171,7 +171,10 @@ module Wist
   end
 
   def do_instantly
-    old_time = Capybara.default_wait_time
+    lambda do
+      default_wait_time = Capybara.default_wait_time
+      @old_wait_time = default_wait_time if default_wait_time > 0
+    end.()
     Capybara.default_wait_time = 0
 
     begin
@@ -179,7 +182,7 @@ module Wist
     rescue => e
       raise(e)
     ensure
-      Capybara.default_wait_time = old_time
+      Capybara.default_wait_time = @old_wait_time
     end
   end
 end
