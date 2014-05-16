@@ -10,22 +10,34 @@ class WistTest < CapybaraTestCase
     assert current_path.match(/test#{num}.html$/)
   end
 
+  def wait_until_test(button)
+    lambda do
+      raise unless button.text == 'clicked'
+      true
+    end
+  end
+
   # tests
   def test_click
     click '#click_test'
     assert_equal 'clicked', find('#click_test').text
   end
 
+  def test_wait_until_nested
+    button = find('#wait_test')
+    button.click
+
+    wait_until do
+      wait_until(&wait_until_test(button))
+    end
+  end
+
   def test_wait_until
     button = find('#wait_test')
     button.click
-    assert button.text != 'clicked'
+    assert(button.text != 'clicked')
 
-    wait_until do
-      raise unless button.text == 'clicked'
-      true
-    end
-
+    wait_until(&wait_until_test(button))
     # make sure default wait time is back to normal
     assert_equal(2, Capybara.default_wait_time)
   end
