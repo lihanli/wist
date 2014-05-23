@@ -96,6 +96,7 @@ module Wist
     if element_to_click.nil?
       yield
     else
+      element_to_click = find(element_to_click, visible: true) if element_to_click.is_a?(String)
       element_to_click.click
     end
 
