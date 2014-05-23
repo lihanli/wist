@@ -9,7 +9,7 @@ GIT
 PATH
   remote: .
   specs:
-    wist (0.2.1)
+    wist (0.2.2)
       capybara
       selenium-webdriver
 
