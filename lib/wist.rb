@@ -27,8 +27,8 @@ module Wist
     end
   end
 
-  def click(selector)
-    find(selector).click
+  def click(*args)
+    find(*args).click
   end
 
   def set_cookie(k, v)

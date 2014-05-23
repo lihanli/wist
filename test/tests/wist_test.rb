@@ -19,8 +19,8 @@ class WistTest < CapybaraTestCase
 
   # tests
   def test_click
-    click '#click_test'
-    assert_equal 'clicked', find('#click_test').text
+    click('#click_test', visible: true)
+    assert_equal('clicked', find('#click_test').text)
   end
 
   def test_wait_until_nested
