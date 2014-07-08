@@ -167,8 +167,8 @@ module Wist
     end
   end
 
-  def has_css_instant?(selector)
-    do_instantly { has_css?(selector) }
+  def has_css_instant?(*args)
+    do_instantly { has_css?(*args) }
   end
 
   def do_instantly

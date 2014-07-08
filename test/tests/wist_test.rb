@@ -179,7 +179,7 @@ class WistTest < CapybaraTestCase
   end
 
   def test_has_css_instant?
-    assert_equal(true, has_css_instant?('body'))
+    assert_equal(true, has_css_instant?('body', visible: true))
     assert_equal(false, has_css_instant?('#sdklfjk'))
   end
 
