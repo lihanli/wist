@@ -174,7 +174,7 @@ class WistTest < CapybaraTestCase
   end
 
   def test_assert_css
-    assert_has_css('#click_test', visible: true)
+    assert_has_css('#click_test')
     assert_has_no_css('#dog123')
   end
 

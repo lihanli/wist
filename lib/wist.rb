@@ -175,8 +175,9 @@ module Wist
   end
 
   %w(has has_no).each do |prefix|
-    define_method("assert_#{prefix}_css") do |*args|
-      wist_assert(send("#{prefix}_css?", *args), true)
+    define_method("assert_#{prefix}_css") do |selector, opt = {}|
+      opt[:visible] = true if opt[:visible].nil?
+      wist_assert(send("#{prefix}_css?", selector, opt), true)
     end
   end
 
