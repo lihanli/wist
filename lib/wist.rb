@@ -7,11 +7,24 @@ module Wist
     Capybara::Selenium::Driver.new(app, browser: :chrome)
   end
 
+  class << self
+    attr_accessor(:rspec)
+  end
+  self.rspec = defined?(RSpec)
+
   module Helpers
     module_function
 
     def blank?(obj)
       obj.respond_to?(:empty?) ? obj.empty? : !obj
+    end
+  end
+
+  def wist_assert(value, expected)
+    if Wist.rspec
+      value.should == expected
+    else
+      assert_equal(expected, value)
     end
   end
 
@@ -46,7 +59,7 @@ module Wist
   def verify_tweet_button(text)
     share_button_src = nil
     wait_until { share_button_src = find('.twitter-share-button')[:src] }
-    assert_equal text, CGI.parse(URI.parse(share_button_src.gsub('#', '?')).query)['text'][0]
+    wist_assert(CGI.parse(URI.parse(share_button_src.gsub('#', '?')).query)['text'][0], text)
   end
 
   def driver
@@ -64,7 +77,7 @@ module Wist
   def alert_accept(expected_msg = false)
     page.execute_script "window.alert = function(msg) { window.lastAlertMsg = msg; }"
     yield
-    assert_equal(expected_msg, get_js('window.lastAlertMsg')) if expected_msg
+    wist_assert(get_js('window.lastAlertMsg'), expected_msg) if expected_msg
   end
 
   def get_js(code)
@@ -143,11 +156,11 @@ module Wist
   end
 
   def assert_text(text, el)
-    assert_equal(text, el.text)
+    wist_assert(el.text, text)
   end
 
   def assert_text_include(text, el)
-    assert_equal(true, el.text.include?(text))
+    wist_assert(el.text.include?(text), true)
   end
 
   def parent(el)
@@ -163,7 +176,7 @@ module Wist
 
   %w(has has_no).each do |prefix|
     define_method("assert_#{prefix}_css") do |*args|
-      assert_equal(true, send("#{prefix}_css?", *args))
+      wist_assert(send("#{prefix}_css?", *args), true)
     end
   end
 

@@ -1,10 +1,11 @@
 require 'wist'
 require 'capybara/poltergeist'
 require 'pry'
-begin; require 'turn/autorun'; rescue LoadError; end
-Turn.config.format = :dot
+require "minitest/autorun"
+require "minitest/reporters"
+Minitest::Reporters.use!
 
-class CapybaraTestCase < Test::Unit::TestCase
+class CapybaraTestCase < Minitest::Test
   include Capybara::DSL
   include Wist
 
