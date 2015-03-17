@@ -46,3 +46,7 @@ $('#finder_with_wait').click(function () {
 $('#click_by_text').click(function () {
   $(this).text('clicked');
 });
+
+$('#confirm_test').click(function() {
+  window.confirmed = confirm('foo');
+});

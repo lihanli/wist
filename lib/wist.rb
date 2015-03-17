@@ -74,6 +74,10 @@ module Wist
     end
   end
 
+  def interact_with_confirm(accept = true)
+    page.execute_script("window.confirm = function() { return #{accept.to_json} }")
+  end
+
   def alert_accept(expected_msg = false)
     page.execute_script "window.alert = function(msg) { window.lastAlertMsg = msg; }"
     yield

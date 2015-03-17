@@ -198,4 +198,12 @@ class WistTest < CapybaraTestCase
     assert_equal(0, new_time)
     assert_equal(old_time, Capybara.default_wait_time)
   end
+
+  def test_interact_with_confirm
+    [true, false].each do |bool|
+      interact_with_confirm(bool)
+      click('#confirm_test')
+      assert_equal(bool, get_js('confirmed'))
+    end
+  end
 end
