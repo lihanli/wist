@@ -3,7 +3,7 @@ require 'capybara/poltergeist'
 require 'pry'
 require "minitest/autorun"
 require "minitest/reporters"
-Minitest::Reporters.use!
+Minitest::Reporters.use!(Minitest::Reporters::SpecReporter.new)
 
 class CapybaraTestCase < Minitest::Test
   include Capybara::DSL
