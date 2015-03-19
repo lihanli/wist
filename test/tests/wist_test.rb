@@ -49,14 +49,19 @@ class WistTest < CapybaraTestCase
 
   def test_switch_to_window_and_execute
     return if Capybara.javascript_driver == :poltergeist
-    verify_test_page 0
-    click '#switch_window_test'
-
-    switch_to_window_and_execute do
-      verify_test_page 1
+    assert_num_windows = lambda do |num|
+      assert_equal(num, page.driver.browser.window_handles.size)
     end
 
-    verify_test_page 0
+    verify_test_page(0)
+
+    switch_to_window_and_execute(-> { click('#switch_window_test') }) do
+      verify_test_page(1)
+      assert_num_windows.(2)
+    end
+
+    assert_num_windows.(1)
+    verify_test_page(0)
   end
 
   def test_get_js

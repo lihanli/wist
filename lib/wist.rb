@@ -66,9 +66,8 @@ module Wist
     page.driver.browser
   end
 
-  def switch_to_window_and_execute
-    wait_until { driver.window_handles.size == 2 }
-    within_window(driver.window_handles.last) do
+  def switch_to_window_and_execute(new_window_lambda)
+    within_window(window_opened_by(&new_window_lambda)) do
       yield
       driver.close
     end
