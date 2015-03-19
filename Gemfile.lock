@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    wist (0.2.5)
+    wist (0.2.6)
       capybara
       selenium-webdriver
 
