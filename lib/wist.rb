@@ -204,4 +204,8 @@ module Wist
       Capybara.default_wait_time = @old_wait_time
     end
   end
+
+  def assert_el_has_link(selector, link)
+    wist_assert(get_js("$('#{selector}').attr('href')"), link)
+  end
 end

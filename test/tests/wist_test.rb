@@ -206,4 +206,12 @@ class WistTest < CapybaraTestCase
       assert_equal(bool, get_js('confirmed'))
     end
   end
+
+  def test_assert_el_has_link
+    assert_el_has_link('#switch_window_test', 'test1.html')
+
+    assert_raises(Minitest::Assertion) do
+      assert_el_has_link('#switch_window_test', 'foo')
+    end
+  end
 end
