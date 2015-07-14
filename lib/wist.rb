@@ -80,7 +80,10 @@ module Wist
   def alert_accept(expected_msg = false)
     page.execute_script "window.alert = function(msg) { window.lastAlertMsg = msg; }"
     yield
-    wist_assert(get_js('window.lastAlertMsg'), expected_msg) if expected_msg
+
+    wait_until do
+      get_js('window.lastAlertMsg') == expected_msg
+    end if expected_msg
   end
 
   def get_js(code)
