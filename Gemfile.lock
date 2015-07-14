@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    wist (0.2.6)
+    wist (0.2.7)
       capybara
       selenium-webdriver
 
@@ -20,7 +20,7 @@ GEM
       ffi (~> 1.0, >= 1.0.11)
     cliver (0.3.2)
     coderay (1.0.9)
-    ffi (1.9.6)
+    ffi (1.9.8)
     method_source (0.8.2)
     mime-types (2.4.3)
     mini_portile (0.6.2)
