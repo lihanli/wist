@@ -8,12 +8,27 @@ module Wist
   end
 
   class << self
-    attr_accessor(:rspec)
+    attr_accessor(:rspec_should)
+    attr_accessor(:rspec_expect)
+    attr_accessor(:assert_syntax_detected)
   end
-  self.rspec = defined?(RSpec)
 
   module Helpers
     module_function
+
+    def detect_assert_syntax
+      return if Wist.assert_syntax_detected
+
+      if defined?(RSpec)
+        if RSpec.configuration.expect_with[0].configuration.syntax.include?(:expect)
+          Wist.rspec_expect = true
+        else
+          Wist.rspec_should = true
+        end
+      end
+
+      Wist.assert_syntax_detected = true
+    end
 
     def blank?(obj)
       obj.respond_to?(:empty?) ? obj.empty? : !obj
@@ -21,7 +36,11 @@ module Wist
   end
 
   def wist_assert(value, expected)
-    if Wist.rspec
+    Helpers.detect_assert_syntax
+
+    if Wist.rspec_expect
+      expect(value).to eq(expected)
+    elsif Wist.rspec_should
       value.should == expected
     else
       assert_equal(expected, value)
