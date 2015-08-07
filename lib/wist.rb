@@ -128,14 +128,21 @@ module Wist
     klass.split(' ').include?(class_name)
   end
 
+  def process_el_or_selector(el_or_selector)
+    if el_or_selector.is_a?(String)
+      find(el_or_selector, visible: true)
+    else
+      el_or_selector
+    end
+  end
+
   def wait_for_new_url(element_to_click = nil)
     old_url = current_url
 
     if element_to_click.nil?
       yield
     else
-      element_to_click = find(element_to_click, visible: true) if element_to_click.is_a?(String)
-      element_to_click.click
+      process_el_or_selector(element_to_click).click
     end
 
     sleep 1
