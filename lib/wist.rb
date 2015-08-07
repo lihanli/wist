@@ -187,8 +187,8 @@ module Wist
     raise "visit #{url} failed" unless status == 'success'
   end
 
-  def assert_text(text, el)
-    wist_assert(el.text, text)
+  def assert_text(text, el_or_selector)
+    wist_assert(process_el_or_selector(el_or_selector).text, text)
   end
 
   def assert_text_include(text, el)
