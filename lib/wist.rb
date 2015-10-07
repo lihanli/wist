@@ -219,17 +219,17 @@ module Wist
 
   def do_instantly
     lambda do
-      default_wait_time = Capybara.default_wait_time
-      @old_wait_time = default_wait_time if default_wait_time > 0
+      default_max_wait_time = Capybara.default_max_wait_time
+      @old_wait_time = default_max_wait_time if default_max_wait_time > 0
     end.()
-    Capybara.default_wait_time = 0
+    Capybara.default_max_wait_time = 0
 
     begin
       yield
     rescue => e
       raise(e)
     ensure
-      Capybara.default_wait_time = @old_wait_time
+      Capybara.default_max_wait_time = @old_wait_time
     end
   end
 

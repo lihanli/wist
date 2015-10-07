@@ -39,7 +39,7 @@ class WistTest < CapybaraTestCase
 
     wait_until(&wait_until_test(button))
     # make sure default wait time is back to normal
-    assert_equal(2, Capybara.default_wait_time)
+    assert_equal(2, Capybara.default_max_wait_time)
   end
 
   def test_verify_tweet_button
@@ -193,19 +193,19 @@ class WistTest < CapybaraTestCase
   end
 
   def test_do_instantly
-    old_time = Capybara.default_wait_time
+    old_time = Capybara.default_max_wait_time
     new_time = nil
 
     begin
       do_instantly do
-        new_time = Capybara.default_wait_time
+        new_time = Capybara.default_max_wait_time
         raise
       end
     rescue
     end
 
     assert_equal(0, new_time)
-    assert_equal(old_time, Capybara.default_wait_time)
+    assert_equal(old_time, Capybara.default_max_wait_time)
   end
 
   def test_interact_with_confirm
