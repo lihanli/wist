@@ -14,7 +14,7 @@ module Wist
     attr_accessor(:wait_time_method)
   end
 
-  Wist.wait_time_method = if defined?(Capybara.default_max_wait_time)
+  self.wait_time_method = if defined?(Capybara.default_max_wait_time)
     :default_max_wait_time
   else
     :default_wait_time
