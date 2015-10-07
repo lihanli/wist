@@ -11,7 +11,15 @@ module Wist
     attr_accessor(:rspec_should)
     attr_accessor(:rspec_expect)
     attr_accessor(:assert_syntax_detected)
+    attr_accessor(:wait_time_method)
   end
+
+  Wist.wait_time_method = if defined?(Capybara.default_max_wait_time)
+    :default_max_wait_time
+  else
+    :default_wait_time
+  end
+
 
   module Helpers
     module_function
@@ -217,19 +225,23 @@ module Wist
     do_instantly { has_css?(*args) }
   end
 
+  def get_capybara_wait_time
+    Capybara.public_send(Wist.wait_time_method)
+  end
+
   def do_instantly
     lambda do
-      default_max_wait_time = Capybara.default_max_wait_time
+      default_max_wait_time = get_capybara_wait_time
       @old_wait_time = default_max_wait_time if default_max_wait_time > 0
     end.()
-    Capybara.default_max_wait_time = 0
+    Capybara.public_send("#{Wist.wait_time_method}=", 0)
 
     begin
       yield
     rescue => e
       raise(e)
     ensure
-      Capybara.default_max_wait_time = @old_wait_time
+      Capybara.public_send("#{Wist.wait_time_method}=", @old_wait_time)
     end
   end
 
