@@ -1,7 +1,7 @@
 source 'http://rubygems.org/'
 gemspec
 
-gem 'capybara', '2.4.4'
+gem 'capybara', '2.5.0'
 gem 'pry'
 gem 'rake'
 gem "poltergeist", "1.5.1"
