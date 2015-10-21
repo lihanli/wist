@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    wist (0.4.0)
+    wist (0.4.1)
       capybara
       common_assert
       selenium-webdriver

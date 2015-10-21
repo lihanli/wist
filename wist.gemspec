@@ -1,6 +1,6 @@
 Gem::Specification.new do |gem|
   gem.name     = 'wist'
-  gem.version  = '0.4.0'
+  gem.version  = '0.4.1'
   gem.summary  = 'capybara helpers'
   gem.author   = 'Lihan Li'
   gem.email    = 'frankieteardrop@gmail.com'
