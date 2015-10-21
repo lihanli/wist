@@ -2,15 +2,17 @@ module Wist
   require 'selenium-webdriver'
   require 'cgi'
   require 'capybara'
+  require 'common_assert'
+
+  def self.included(klass)
+    klass.include CommonAssert
+  end
 
   Capybara.register_driver :chrome do |app|
     Capybara::Selenium::Driver.new(app, browser: :chrome)
   end
 
   class << self
-    attr_accessor(:rspec_should)
-    attr_accessor(:rspec_expect)
-    attr_accessor(:assert_syntax_detected)
     attr_accessor(:wait_time_method)
   end
 
@@ -20,38 +22,11 @@ module Wist
     :default_wait_time
   end
 
-
   module Helpers
     module_function
 
-    def detect_assert_syntax
-      return if Wist.assert_syntax_detected
-
-      if defined?(RSpec)
-        if RSpec.configuration.expect_with[0].configuration.syntax.include?(:expect)
-          Wist.rspec_expect = true
-        else
-          Wist.rspec_should = true
-        end
-      end
-
-      Wist.assert_syntax_detected = true
-    end
-
     def blank?(obj)
       obj.respond_to?(:empty?) ? obj.empty? : !obj
-    end
-  end
-
-  def wist_assert(value, expected)
-    Helpers.detect_assert_syntax
-
-    if Wist.rspec_expect
-      expect(value).to eq(expected)
-    elsif Wist.rspec_should
-      value.should == expected
-    else
-      assert_equal(expected, value)
     end
   end
 
@@ -86,7 +61,7 @@ module Wist
   def verify_tweet_button(text)
     share_button_src = nil
     wait_until { share_button_src = find('.twitter-share-button')[:src] }
-    wist_assert(CGI.parse(URI.parse(share_button_src.gsub('#', '?')).query)['text'][0], text)
+    common_assert_equal(CGI.parse(URI.parse(share_button_src.gsub('#', '?')).query)['text'][0], text)
   end
 
   def driver
@@ -196,11 +171,11 @@ module Wist
   end
 
   def assert_text(text, el_or_selector)
-    wist_assert(process_el_or_selector(el_or_selector).text, text)
+    common_assert_equal(process_el_or_selector(el_or_selector).text, text)
   end
 
   def assert_text_include(text, el)
-    wist_assert(el.text.include?(text), true)
+    common_assert_equal(el.text.include?(text), true)
   end
 
   def parent(el)
@@ -217,7 +192,7 @@ module Wist
   %w(has has_no).each do |prefix|
     define_method("assert_#{prefix}_css") do |selector, opt = {}|
       opt[:visible] = true if opt[:visible].nil?
-      wist_assert(send("#{prefix}_css?", selector, opt), true)
+      common_assert_equal(send("#{prefix}_css?", selector, opt), true)
     end
   end
 
@@ -246,6 +221,6 @@ module Wist
   end
 
   def assert_el_has_link(selector, link)
-    wist_assert(get_js("$('#{selector}').attr('href')"), link)
+    common_assert_equal(get_js("$('#{selector}').attr('href')"), link)
   end
 end

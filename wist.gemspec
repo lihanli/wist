@@ -9,6 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'capybara'
   gem.add_dependency 'selenium-webdriver'
+  gem.add_dependency 'common_assert'
 
   gem.files         = `git ls-files`.split("\n")
   gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
