@@ -6,9 +6,7 @@ Rake::TestTask.new('test') do |t|
 end
 
 task 'test:all' do
-  Rake::Task['test'].execute
-
-  %w(chrome poltergeist).each do |browser|
+  %w(selenium_chrome_headless).each do |browser|
     ENV['BROWSER'] = browser
     Rake::Task['test'].execute
   end

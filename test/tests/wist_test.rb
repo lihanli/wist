@@ -126,12 +126,6 @@ class WistTest < CapybaraTestCase
     assert_equal('changed', get_val('#test_set_value_and_trigger_evts'))
   end
 
-  def test_set_cookie
-    return if Capybara.javascript_driver == :chrome
-    set_cookie('foo', 'bar')
-    assert_equal('bar', page.evaluate_script("$.cookie('foo')"))
-  end
-
   def test_set_input_and_press_enter
     alert_accept('enter pressed') do
       set_input_and_press_enter('#test_set_input_and_press_enter', 'bar')
@@ -152,17 +146,6 @@ class WistTest < CapybaraTestCase
     refresh
     click('#finder_with_wait')
     assert_equal('finder_with_wait', all_with_wait('.done', visible: true)[0][:id])
-  end
-
-  def test_visit_with_retries
-    return unless Capybara.javascript_driver == :poltergeist
-
-    assert_raise RuntimeError do
-      visit_with_retries('a.bc', retries: 2, wait_time: 1)
-    end
-
-    visit_with_retries("file://#{Dir.pwd}/test/test0.html")
-    verify_test_page(0)
   end
 
   def test_assert_text

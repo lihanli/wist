@@ -46,13 +46,6 @@ module Wist
     find(*args).click
   end
 
-  def set_cookie(k, v)
-    page.execute_script <<-eos
-      (function (e,t,n){var r=new Date;r.setDate(r.getDate()+n);var i=escape(t)+(n==null?"":"; expires="+r.toUTCString());document.cookie=e+"="+i}
-      (#{k.to_json}, #{v.to_json}));
-    eos
-  end
-
   def set_value_and_trigger_evts(selector, val)
     find(selector).set(val)
     page.execute_script("$('#{selector}').focusout().blur().change().trigger('input')")
@@ -154,20 +147,6 @@ module Wist
       has_css?(*args)
       send(finder.to_sym, *args)
     end
-  end
-
-  def visit_with_retries(url, retries: 5, wait_time: 10)
-    raise 'only works with poltergeist' unless Capybara.javascript_driver == :poltergeist
-    status = nil
-
-    retries.times do |i|
-      status = visit(url)['status']
-      break if status == 'success'
-      puts "visiting #{url} failed, attempting retry #{i + 1}/#{retries} in #{wait_time} second(s)"
-      sleep wait_time
-    end
-
-    raise "visit #{url} failed" unless status == 'success'
   end
 
   def assert_text(text, el_or_selector)

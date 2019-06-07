@@ -1,8 +1,8 @@
 require 'wist'
-require 'capybara/poltergeist'
 require 'pry'
 require "minitest/autorun"
 require "minitest/reporters"
+require 'capybara/minitest'
 Minitest::Reporters.use!(Minitest::Reporters::SpecReporter.new)
 
 class CapybaraTestCase < Minitest::Test
