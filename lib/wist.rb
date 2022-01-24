@@ -42,8 +42,8 @@ module Wist
     end
   end
 
-  def click(*args)
-    find(*args).click
+  def click(...)
+    find(...).click
   end
 
   def set_value_and_trigger_evts(selector, val)
@@ -143,9 +143,9 @@ module Wist
   end
 
   %w(first all).each do |finder|
-    define_method("#{finder}_with_wait") do |*args|
-      has_css?(*args)
-      send(finder.to_sym, *args)
+    define_method("#{finder}_with_wait") do |*args, **kwargs|
+      has_css?(*args, **kwargs)
+      send(finder.to_sym, *args, **kwargs)
     end
   end
 
@@ -171,12 +171,12 @@ module Wist
   %w(has has_no).each do |prefix|
     define_method("assert_#{prefix}_css") do |selector, opt = {}|
       opt[:visible] = true if opt[:visible].nil?
-      common_assert_equal(send("#{prefix}_css?", selector, opt), true)
+      common_assert_equal(send("#{prefix}_css?", selector, **opt), true)
     end
   end
 
-  def has_css_instant?(*args)
-    do_instantly { has_css?(*args) }
+  def has_css_instant?(...)
+    do_instantly { has_css?(...) }
   end
 
   def get_capybara_wait_time
